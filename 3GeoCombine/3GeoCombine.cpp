@@ -109,7 +109,7 @@ public:
 		{
 			if (lengths[i] == 0)
 			{
-				k += 1;
+				throw runtime_error("Points coincidence");
 			}
 		}
 		if (k != 0)
@@ -228,106 +228,116 @@ int main()
 	if (n_boreholes < 0) { cout << "Not true!" << "\n"; }
 	else
 	{
-		double tablica[ROWS][COLS] = { 0 };
-		int row = 0, col;
-		char buff[BUFFSIZE];
 
-		string path_i, path_o;
-
-		cout << "Type in the path of your input data:" << endl; //the user is required to type in the input path
-		cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomInput.txt" << endl << endl;
-		cin >> path_i;
-
-		ifstream download(path_i);
-		if (!download) cout << "Error in opening file" << endl; //the case when the file cannot be uploaded
-
-		cout << "Type in the path of the output:" << endl; //the user is required to type in the output path
-		cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomOutput.txt" << endl << endl;
-		cin >> path_o;
-
-		string tempor;//a temporary variable storing figures while uploading
-		stringstream ss;
-
-		vector <Point> pits;
-
-		while (download.getline(buff, BUFFSIZE) && row < ROWS)
+		try
 		{
-			// copy the entire buffered line into the stringstream
-			ss << buff;
-			col = 0;
-			while (ss.getline(buff, 40, ',') && col < COLS)
+			double tablica[ROWS][COLS] = { 0 };
+			int row = 0, col;
+			char buff[BUFFSIZE];
+
+			string path_i, path_o;
+
+			cout << "Type in the path of your input data:" << endl; //the user is required to type in the input path
+			cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomInput.txt" << endl << endl;
+			cin >> path_i;
+
+			ifstream download(path_i);
+			if (!download) cout << "Error in opening file" << endl; //the case when the file cannot be uploaded
+
+			cout << "Type in the path of the output:" << endl; //the user is required to type in the output path
+			cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomOutput.txt" << endl << endl;
+			cin >> path_o;
+
+			string tempor;//a temporary variable storing figures while uploading
+			stringstream ss;
+
+			vector <Point> pits;
+
+			while (download.getline(buff, BUFFSIZE) && row < ROWS)
 			{
-				tablica[row][col] = atoi(buff);
-				++col;
-			}
-			ss << "";
-			ss.clear();
-			++row;
-		}
-		download.close();
-
-		cout << "\n";
-		int k = 0;
-
-		ofstream all(path_o);
-
-		all << "X1" << ';' << "Y1" << ';' << "Z1" << ';' << "X2" << ';' <<
-			"Y2" << ';' << "Z2" << ';' << "X3" << ';' << "Y3" << ';' << "Z3"
-			<< ';' << "X_C" << ";" << "Y_C" << ";" << "X_N" << ";" << "Y_N"
-			<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
-			";" << "DOC" << ";" << "Area" << "\n";
-		const int g = 3;
-
-		int l_komb = n_comb(n_boreholes);
-
-
-		while ((2 + k) <= l_komb - 1)
-		{
-			int S[g];
-			for (int i = 0; i < g; i++) S[i] = i;
-
-			int p = g - 1;
-
-			while (p >= 0)
-			{
-				double point_1[] = { tablica[S[0]][0], tablica[S[0]][1], tablica[S[0]][2] };
-				double point_2[] = { tablica[S[1]][0], tablica[S[1]][1], tablica[S[1]][2] };
-				double point_3[] = { tablica[S[2]][0], tablica[S[2]][1], tablica[S[2]][2] };
-
-				plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
-				string result = current_plane.measure();								//extracting the dip angle and the dip direction
-				string centroid = current_plane.center(point_1, point_2, point_3);
-
-				double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
-				double y_n = current_plane.normal_vec[1];
-				double z_n = current_plane.normal_vec[2];
-
-				x_n = x_n / current_plane.length(current_plane.normal_vec);
-				y_n = y_n / current_plane.length(current_plane.normal_vec);
-				z_n = z_n / current_plane.length(current_plane.normal_vec);
-
-				all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
-					to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
-					to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
-					centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
-					endl;
-
-				k = k + 3;
-
-				cout << "\n";
-				if (S[g - 1] == n_boreholes - 1) { p--; }
-				else { p = g - 1; }
-				if (p >= 0)
+				// copy the entire buffered line into the stringstream
+				ss << buff;
+				col = 0;
+				while (ss.getline(buff, 40, ',') && col < COLS)
 				{
-					for (int i = g - 1; i >= p; i--)
-					{
-						S[i] = S[p] + i - p + 1;
-					}
+					tablica[row][col] = atoi(buff);
+					++col;
 				}
-				::total++;
+				ss << "";
+				ss.clear();
+				++row;
 			}
+			download.close();
+
+			cout << "\n";
+			int k = 0;
+
+			ofstream all(path_o);
+
+			all << "X1" << ';' << "Y1" << ';' << "Z1" << ';' << "X2" << ';' <<
+				"Y2" << ';' << "Z2" << ';' << "X3" << ';' << "Y3" << ';' << "Z3"
+				<< ';' << "X_C" << ";" << "Y_C" << ";" << "X_N" << ";" << "Y_N"
+				<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
+				";" << "DOC" << ";" << "Area" << "\n";
+			const int g = 3;
+
+			int l_komb = n_comb(n_boreholes);
+
+
+			while ((2 + k) <= l_komb - 1)
+			{
+				int S[g];
+				for (int i = 0; i < g; i++) S[i] = i;
+
+				int p = g - 1;
+
+				while (p >= 0)
+				{
+					double point_1[] = { tablica[S[0]][0], tablica[S[0]][1], tablica[S[0]][2] };
+					double point_2[] = { tablica[S[1]][0], tablica[S[1]][1], tablica[S[1]][2] };
+					double point_3[] = { tablica[S[2]][0], tablica[S[2]][1], tablica[S[2]][2] };
+
+					plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
+					string result = current_plane.measure();								//extracting the dip angle and the dip direction
+					string centroid = current_plane.center(point_1, point_2, point_3);
+
+					double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
+					double y_n = current_plane.normal_vec[1];
+					double z_n = current_plane.normal_vec[2];
+
+					x_n = x_n / current_plane.length(current_plane.normal_vec);
+					y_n = y_n / current_plane.length(current_plane.normal_vec);
+					z_n = z_n / current_plane.length(current_plane.normal_vec);
+
+					all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
+						to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
+						to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
+						centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+						endl;
+
+					k = k + 3;
+
+					cout << "\n";
+					if (S[g - 1] == n_boreholes - 1) { p--; }
+					else { p = g - 1; }
+					if (p >= 0)
+					{
+						for (int i = g - 1; i >= p; i--)
+						{
+							S[i] = S[p] + i - p + 1;
+						}
+					}
+					::total++;
+				}
+			}
+			all.close();
+
 		}
-		all.close();
+		catch (runtime_error e)
+		{
+
+			cout << "Runtime error: " << e.what();
+		}
 	}
 	system("PAUSE");
 	return 0;
