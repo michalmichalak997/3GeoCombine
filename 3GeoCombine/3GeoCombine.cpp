@@ -21,6 +21,7 @@ const int k_COLS = 3;
 const int BUFFSIZE = 80;
 double aktu[3];
 int total = 0;
+const double ratio = 100.00;
 
 
 int n_comb(int s)
@@ -306,9 +307,9 @@ int main()
 				y_n = y_n / current_plane.length(current_plane.normal_vec);
 				z_n = z_n / current_plane.length(current_plane.normal_vec);
 
-				all << to_string(point_1[0] / 100.00) << ";" << to_string(point_1[1] / 100.00) << ";" << to_string(point_1[2] / 100.00) << ";" << //saving orientation elements with respect to the column names
-					to_string(point_2[0] / 100.00) << ";" << to_string(point_2[1] / 100.00) << ";" << to_string(point_2[2] / 100.00) << ";" <<
-					to_string(point_3[0] / 100.00) << ";" << to_string(point_3[1] / 100.00) << ";" << to_string(point_3[2] / 100.00) << ";" <<
+				all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
+					to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
+					to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
 					centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 					endl;
 
