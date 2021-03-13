@@ -35,15 +35,12 @@ int n_comb(int s)
 	return komb / 6;
 }
 
-class Point
+struct Point
 {
 	int x, y, z;
-public:
-	Point(int x_1, int x_2, int x_3) {
-		x = x_1;
-		y = x_2;
-		z = x_3;
-	}
+
+	Point(int x_1, int x_2, int x_3)
+		:x(x_1), y(x_2), z(x_3) {}
 };
 
 class plane //a class that stores the crucial figures in terms of computing the orientation
