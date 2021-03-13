@@ -223,6 +223,8 @@ int main()
 	cout << "Type in the number of boreholes" << endl;
 	cin >> n_boreholes; cout << "\n";
 
+	cout << "You will get: " << n_comb(n_boreholes) << " observations" << endl;
+
 	if (n_boreholes < 0) { cout << "Not true!" << "\n"; }
 	else
 	{
