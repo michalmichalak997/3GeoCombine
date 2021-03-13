@@ -317,7 +317,7 @@ int main()
 
 					k = k + 3;
 
-					cout << "\n";
+				
 					if (S[g - 1] == n_boreholes - 1) { p--; }
 					else { p = g - 1; }
 					if (p >= 0)
