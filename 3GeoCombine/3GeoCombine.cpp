@@ -316,7 +316,7 @@ int main()
 				
 				}
 			}
-			all.close();
+			
 
 		}
 		catch (runtime_error e)
