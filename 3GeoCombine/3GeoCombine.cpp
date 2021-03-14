@@ -282,7 +282,6 @@ int main()
 				";" << "DOC" << ";" << "Area" << "\n";
 			
 			
-			
 
 			int l_komb = n_comb(n_boreholes);
 
@@ -318,7 +317,7 @@ int main()
 						centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 						endl;
 
-					//k = k + 3;
+					k = k + 3;
 
 				
 					if (S[g - 1] == n_boreholes - 1) { p--; }
