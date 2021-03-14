@@ -22,6 +22,7 @@ const int BUFFSIZE = 80;
 double aktu[3];
 int total = 0;
 const double ratio = 100.00;
+const int g = 3;
 
 
 int n_comb(int s)
@@ -279,12 +280,14 @@ int main()
 				<< ';' << "X_C" << ";" << "Y_C" << ";" << "X_N" << ";" << "Y_N"
 				<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
 				";" << "DOC" << ";" << "Area" << "\n";
-			const int g = 3;
+			
+			
+			
 
 			int l_komb = n_comb(n_boreholes);
 
 
-			while ((2 + k) <= l_komb - 1)
+			while ( l_komb >= (k + 3))
 			{
 				int S[g];
 				for (int i = 0; i < g; i++) S[i] = i;
@@ -315,7 +318,7 @@ int main()
 						centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 						endl;
 
-					k = k + 3;
+					//k = k + 3;
 
 				
 					if (S[g - 1] == n_boreholes - 1) { p--; }
