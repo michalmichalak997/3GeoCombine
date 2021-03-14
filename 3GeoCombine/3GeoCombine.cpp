@@ -13,13 +13,7 @@
 
 using namespace std;
 
-//const int ROWS = 35000;
-//const int k_ROWS = 35000;
-//const int COLS = 3; 
-//const int k_COLS = 3;
-//const int BUFFSIZE = 80;
-//double aktu[3];
-//int total = 0;
+
 const int n = 3;
 const double ratio = 100.00;
 const int g = 3;
@@ -232,9 +226,6 @@ int main()
 
 		try
 		{
-			//double tablica[ROWS][COLS] = { 0 };
-			//int row = 0, col;
-			//char buff[BUFFSIZE];
 
 			string path_i, path_o;
 
@@ -249,23 +240,7 @@ int main()
 			cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomOutput.txt" << endl << endl;
 			cin >> path_o;
 
-/*
-			while (download.getline(buff, BUFFSIZE) && row < ROWS)
-			{
-				// copy the entire buffered line into the stringstream
-				ss << buff;
-				col = 0;
-				while (ss.getline(buff, 40, ',') && col < COLS)
-				{
-					tablica[row][col] = atoi(buff);
-					++col;
-				}
-				ss << "";
-				ss.clear();
-				++row;
-			}
 
-*/
 			string tempor;//a temporary variable storing figures while uploading
 			stringstream ss;
 			vector <Point> pts; //pits replaced by pts
@@ -338,7 +313,7 @@ int main()
 							S[i] = S[p] + i - p + 1;
 						}
 					}
-					//::total++;
+				
 				}
 			}
 			all.close();
