@@ -213,20 +213,8 @@ public:
 
 int main()
 {
-	int n_boreholes;
-
-	cout << "Type in the number of boreholes" << endl;
-	cin >> n_boreholes; cout << "\n";
-
-	cout << "You will get: " << n_comb(n_boreholes) << " observations" << endl;
-
-	if (n_boreholes < 0) { cout << "Not true!" << "\n"; }
-	else
-	{
-
 		try
 		{
-
 			string path_i, path_o;
 
 			cout << "Type in the path of your input data:" << endl; //the user is required to type in the input path
@@ -240,11 +228,9 @@ int main()
 			cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomOutput.txt" << endl << endl;
 			cin >> path_o;
 
-
 			string tempor;//a temporary variable storing figures while uploading
 			stringstream ss;
 			vector <Point> pts; //pits replaced by pts
-
 
 			while (getline(download, tempor))//loading points line-by-line
 			{
@@ -254,9 +240,13 @@ int main()
 				pts.push_back(Point(a, b, c));
 			}
 
-		
+			int n_boreholes= pts.size();
+			int l_komb = n_comb(n_boreholes);
 
-			cout << "\n";
+
+			cout << "You have successfully uploaded " << n_boreholes << " boreholes" <<  endl;
+			cout << "This will give: " << l_komb << " observations." << endl;
+
 			int k = 0;
 
 			ofstream all(path_o);
@@ -267,9 +257,7 @@ int main()
 				<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
 				";" << "DOC" << ";" << "Area" << "\n";
 
-			int l_komb = n_comb(n_boreholes);
-
-
+		
 			while ( l_komb >= (k + 3))
 			{
 				int S[g];
@@ -302,9 +290,8 @@ int main()
 						endl;
 
 					k = k + 3;
-
 				
-					if (S[g - 1] == n_boreholes - 1) { p--; }
+					if (S[g - 1] == n_boreholes - 1) { p--; } 
 					else { p = g - 1; }
 					if (p >= 0)
 					{
@@ -324,7 +311,7 @@ int main()
 
 			cout << "Runtime error: " << e.what();
 		}
-	}
+	
 	system("PAUSE");
 	return 0;
 }
