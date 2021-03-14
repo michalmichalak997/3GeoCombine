@@ -13,14 +13,14 @@
 
 using namespace std;
 
+//const int ROWS = 35000;
+//const int k_ROWS = 35000;
+//const int COLS = 3; 
+//const int k_COLS = 3;
+//const int BUFFSIZE = 80;
+//double aktu[3];
+//int total = 0;
 const int n = 3;
-const int ROWS = 35000;
-const int k_ROWS = 35000;
-const int COLS = 3;
-const int k_COLS = 3;
-const int BUFFSIZE = 80;
-double aktu[3];
-int total = 0;
 const double ratio = 100.00;
 const int g = 3;
 
@@ -38,9 +38,9 @@ int n_comb(int s)
 
 struct Point
 {
-	int x, y, z;
+	double x, y, z;
 
-	Point(int x_1, int x_2, int x_3)
+	Point(double x_1, double x_2, double x_3)
 		:x(x_1), y(x_2), z(x_3) {}
 };
 
@@ -232,9 +232,9 @@ int main()
 
 		try
 		{
-			double tablica[ROWS][COLS] = { 0 };
-			int row = 0, col;
-			char buff[BUFFSIZE];
+			//double tablica[ROWS][COLS] = { 0 };
+			//int row = 0, col;
+			//char buff[BUFFSIZE];
 
 			string path_i, path_o;
 
@@ -249,11 +249,7 @@ int main()
 			cout << "Example: C:\\dev\\CGAL-4.8\\examples\\Triangulation_2\\JurassicBottomOutput.txt" << endl << endl;
 			cin >> path_o;
 
-			string tempor;//a temporary variable storing figures while uploading
-			stringstream ss;
-
-			vector <Point> pits;
-
+/*
 			while (download.getline(buff, BUFFSIZE) && row < ROWS)
 			{
 				// copy the entire buffered line into the stringstream
@@ -268,7 +264,22 @@ int main()
 				ss.clear();
 				++row;
 			}
-			download.close();
+
+*/
+			string tempor;//a temporary variable storing figures while uploading
+			stringstream ss;
+			vector <Point> pts; //pits replaced by pts
+
+
+			while (getline(download, tempor))//loading points line-by-line
+			{
+				istringstream convert(tempor);
+				double a, b, c;
+				if (!(convert >> a >> b >> c)) { break; }
+				pts.push_back(Point(a, b, c));
+			}
+
+		
 
 			cout << "\n";
 			int k = 0;
@@ -280,8 +291,6 @@ int main()
 				<< ';' << "X_C" << ";" << "Y_C" << ";" << "X_N" << ";" << "Y_N"
 				<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
 				";" << "DOC" << ";" << "Area" << "\n";
-			
-			
 
 			int l_komb = n_comb(n_boreholes);
 
@@ -295,9 +304,9 @@ int main()
 
 				while (p >= 0)
 				{
-					double point_1[] = { tablica[S[0]][0], tablica[S[0]][1], tablica[S[0]][2] };
-					double point_2[] = { tablica[S[1]][0], tablica[S[1]][1], tablica[S[1]][2] };
-					double point_3[] = { tablica[S[2]][0], tablica[S[2]][1], tablica[S[2]][2] };
+					double point_1[] = { pts.at(S[0]).x, pts.at(S[0]).y, pts.at(S[0]).z };
+					double point_2[] = { pts.at(S[1]).x, pts.at(S[1]).y, pts.at(S[1]).z };
+					double point_3[] = { pts.at(S[2]).x, pts.at(S[2]).y, pts.at(S[2]).z };
 
 					plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
 					string result = current_plane.measure();								//extracting the dip angle and the dip direction
@@ -329,7 +338,7 @@ int main()
 							S[i] = S[p] + i - p + 1;
 						}
 					}
-					::total++;
+					//::total++;
 				}
 			}
 			all.close();
