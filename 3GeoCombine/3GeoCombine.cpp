@@ -243,6 +243,7 @@ int main()
 			int n_boreholes= pts.size();
 			int l_komb = n_comb(n_boreholes);
 
+			if (n_boreholes < 3)  throw runtime_error("You need at least three boreholes"); 
 
 			cout << "You have successfully uploaded " << n_boreholes << " boreholes" <<  endl;
 			cout << "This will give: " << l_komb << " observations." << endl;
@@ -257,53 +258,76 @@ int main()
 				<< ";" << "Z_N" << ";" << "Dip_ang" << ';' << "Dip_dir" <<
 				";" << "DOC" << ";" << "Area" << "\n";
 
-		
-			while ( l_komb >= (k + 3))
-			{
-				int S[g];
-				for (int i = 0; i < g; i++) S[i] = i;
+			if (n_boreholes == 3) {
 
-				int p = g - 1;
+				double point_1[] = { pts.at(0).x, pts.at(0).y, pts.at(0).z };
+				double point_2[] = { pts.at(1).x, pts.at(1).y, pts.at(1).z };
+				double point_3[] = { pts.at(2).x, pts.at(2).y, pts.at(2).z };
 
-				while (p >= 0)
-				{
-					double point_1[] = { pts.at(S[0]).x, pts.at(S[0]).y, pts.at(S[0]).z };
-					double point_2[] = { pts.at(S[1]).x, pts.at(S[1]).y, pts.at(S[1]).z };
-					double point_3[] = { pts.at(S[2]).x, pts.at(S[2]).y, pts.at(S[2]).z };
+				plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
+				string result = current_plane.measure();								//extracting the dip angle and the dip direction
+				string centroid = current_plane.center(point_1, point_2, point_3);
 
-					plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
-					string result = current_plane.measure();								//extracting the dip angle and the dip direction
-					string centroid = current_plane.center(point_1, point_2, point_3);
+				double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
+				double y_n = current_plane.normal_vec[1];
+				double z_n = current_plane.normal_vec[2];
 
-					double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
-					double y_n = current_plane.normal_vec[1];
-					double z_n = current_plane.normal_vec[2];
+				x_n = x_n / current_plane.length(current_plane.normal_vec);
+				y_n = y_n / current_plane.length(current_plane.normal_vec);
+				z_n = z_n / current_plane.length(current_plane.normal_vec);
 
-					x_n = x_n / current_plane.length(current_plane.normal_vec);
-					y_n = y_n / current_plane.length(current_plane.normal_vec);
-					z_n = z_n / current_plane.length(current_plane.normal_vec);
+				all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
+					to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
+					to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
+					centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+					endl;
 
-					all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
-						to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
-						to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
-						centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
-						endl;
-
-					k = k + 3;
-				
-					if (S[g - 1] == n_boreholes - 1) { p--; } 
-					else { p = g - 1; }
-					if (p >= 0)
-					{
-						for (int i = g - 1; i >= p; i--)
-						{
-							S[i] = S[p] + i - p + 1;
-						}
-					}
-				
-				}
 			}
-			
+			else
+
+			{
+					int S[g];
+					for (int i = 0; i < g; i++) S[i] = i;
+
+					int p = g - 1;
+
+					while (p >= 0)
+					{
+						double point_1[] = { pts.at(S[0]).x, pts.at(S[0]).y, pts.at(S[0]).z };
+						double point_2[] = { pts.at(S[1]).x, pts.at(S[1]).y, pts.at(S[1]).z };
+						double point_3[] = { pts.at(S[2]).x, pts.at(S[2]).y, pts.at(S[2]).z };
+
+						plane current_plane = plane(point_1, point_2, point_3);					//constructing a plane that is processed at the moment
+						string result = current_plane.measure();								//extracting the dip angle and the dip direction
+						string centroid = current_plane.center(point_1, point_2, point_3);
+
+						double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
+						double y_n = current_plane.normal_vec[1];
+						double z_n = current_plane.normal_vec[2];
+
+						x_n = x_n / current_plane.length(current_plane.normal_vec);
+						y_n = y_n / current_plane.length(current_plane.normal_vec);
+						z_n = z_n / current_plane.length(current_plane.normal_vec);
+
+						all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
+							to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
+							to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
+							centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+							endl;
+
+						if (S[g - 1] == n_boreholes - 1) { p--; }
+						else { p = g - 1; }
+						if (p >= 0)
+						{
+							for (int i = g - 1; i >= p; i--)
+							{
+								S[i] = S[p] + i - p + 1;
+							}
+						}
+
+					}
+
+			}
 
 		}
 		catch (runtime_error e)
