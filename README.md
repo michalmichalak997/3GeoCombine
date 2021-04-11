@@ -1,8 +1,8 @@
 # 3GeoCombine
 
-The title of the manuscript is as follows: Constraining uncertainty of fault orientation using a combinatorial algorithm
+# Title: Constraining uncertainty of fault orientation using a combinatorial algorithm
 
-Co-authors: Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
+# Co-authors: Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
 
 a Institute of Earth Sciences, Faculty of Natural Sciences, University of Silesia in Katowice,
 Będzińska 60, 41-205 Sosnowiec, Poland.
@@ -14,10 +14,26 @@ d Faculty of Science and Technology, University of Silesia in Katowice,
 Bankowa 14, 40-007 Katowice, Poland.
 e Faculty of Engineering, China University of Geosciences, Wuhan, Hubei, China.
 
-Abstract
-This study proposes a multi-stage methodology for estimating the orientation of fault planes that influence the geometry of geological contacts. In this methodology, the information about the estimated orientation is assumed to be ultimately used in spatial clustering, i.e., distilling homogenous patterns from data sampled throughout a faulted contact. Orientation data were obtained through applying triangulation on a network of boreholes, and two synthetic models of contacts having approximately two dozen points and a similar number of triangles were created. Based on these models, we demonstrated a substantial limitation of the proposed method for calculating the expected orientation. The discussed limitation follows from the following reason. While triangulated models often decrease the fault dip angle, investigating the variability in dip direction is of greater importance because it is crucial for conducting spatial clustering. To constrain the variability of the triangles’ dip direction, we employed a combinatorial algorithm to get all possible planes from the given point set, which helped achieve greater concentration of observations around the expected dip direction, and produced additionally counterintuitive orientations of the triangles. The discussed singularities were assumed to be geometrical in nature and therefore require special attention. For conducting spatial clustering within faulted contacts, we suggest considering a wider interval of orientations related to faults. This is because these orientations can be genetically related with faults even if they indicate a relatively high directional within-dissimilarity. Statistical methods for circular data were suggested for assessing the confidence intervals.
+# Abstract
+This study presents experimental results from assessing fault orientation using
+triangulation and a combinatorial algorithm. We constructed two geological surfaces
+with vertical and inclined faults. These surfaces were documented by boreholes and
+represented by triangulated surfaces. We first calculated orientations for a small
+sample of triangles genetically related to faults that were also members of the
+Delaunay triangulation. To reduce the epistemic uncertainty regarding the true fault
+strike, we applied a combinatorial algorithm that allowed us to investigate the
+orientation distribution of all planes genetically related to the fault. The experiment
+revealed three unintuitive effects that require further studies: 1) greater concentration
+of observations about the true dip direction; 2) the same dip direction for different
+triangles; and 3) triangles that dip in the opposite direction to the fault. To conduct
+spatial clustering within surfaces, we suggest considering a broader interval of
+orientations related to faults. This broader interval serves to honor the observation that
+orientations can be genetically related to faults, even if they indicate a relatively high
+directional within-dissimilarity. We suggest statistical methods for circular data to
+investigate the resulting distributions. The computer code associated with this study is
+open source and freely available.
 
-Description.
+# Description
 
 In this study, we supply the computational framework that generates four files on the basis of the supplied coordinates of boreholes (see Computer Code Availability for details of required software):
 	A .txt file with orientations of triangles corresponding to the triangulation model, which also includes information about the location of selected geometric elements. The process of building the triangulation builds upon the Computational Geometry Algorithms Library (CGAL) which provides access to computational geometry algorithms. Orientation Computing Tool (OCT) software is required.
