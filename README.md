@@ -1,8 +1,11 @@
 # 3GeoCombine
 
-# Title: Constraining uncertainty of fault orientation using a combinatorial algorithm
+# Title
+Constraining uncertainty of fault orientation using a combinatorial algorithm
 
-# Co-authors: Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
+# Co-authors
+
+Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
 
 a Institute of Earth Sciences, Faculty of Natural Sciences, University of Silesia in Katowice,
 Będzińska 60, 41-205 Sosnowiec, Poland.
@@ -33,7 +36,7 @@ directional within-dissimilarity. We suggest statistical methods for circular da
 investigate the resulting distributions. The computer code associated with this study is
 open source and freely available.
 
-# Description
+# Software description
 
 In this study, we supply the computational framework that generates four files on the basis of the supplied coordinates of boreholes (see Computer Code Availability for details of required software):
 	A .txt file with orientations of triangles corresponding to the triangulation model, which also includes information about the location of selected geometric elements. The process of building the triangulation builds upon the Computational Geometry Algorithms Library (CGAL) which provides access to computational geometry algorithms. Orientation Computing Tool (OCT) software is required.
