@@ -37,7 +37,15 @@ investigate the resulting distributions. The computer code associated with this 
 open source and freely available.
 
 # Software description
+## How to use the program?
+You only need to specify the path for the input and output files:
+![image](https://user-images.githubusercontent.com/28152295/114365407-bd596580-9b7a-11eb-968e-b21fca674854.png)
 
+## How to prepare the input data?
+In the input file, each line refers to one borehole. The XYZ coordinates are separated by space.
+![image](https://user-images.githubusercontent.com/28152295/114365609-eb3eaa00-9b7a-11eb-9604-aeeb6ee42313.png)
+
+## Further description
 In this study, we supply the computational framework that generates four files on the basis of the supplied coordinates of boreholes (see Computer Code Availability for details of required software):
 	A .txt file with orientations of triangles corresponding to the triangulation model, which also includes information about the location of selected geometric elements. The process of building the triangulation builds upon the Computational Geometry Algorithms Library (CGAL) which provides access to computational geometry algorithms. Orientation Computing Tool (OCT) software is required.
 	A .txt file with orientations of triangles corresponding to all planes that can be generated from all input points, which relates to the combinatorial algorithm for creating all k-element subsets from an n-element set. 3GeoCombine software is required.
