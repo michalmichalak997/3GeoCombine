@@ -52,5 +52,5 @@ The first nine columns are the coordinates of the vertices corresponding to the 
 
 ## Supplementary software
 
-If you want to obtain orientations from Delaunay triangulation, please use Orientation Computing Tool.
+If you want to obtain orientations from Delaunay triangulation, please use Orientation Computing Tool https://github.com/michalmichalak997/OCT .
 
