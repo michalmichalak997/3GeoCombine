@@ -7,15 +7,17 @@ Constraining uncertainty of fault orientation using a combinatorial algorithm
 
 Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
 
-a Institute of Earth Sciences, Faculty of Natural Sciences, University of Silesia in Katowice,
-Będzińska 60, 41-205 Sosnowiec, Poland.
-b AGH University of Technology in Kraków, al. Mickiewicza 30, Kraków, Poland.
-1 Corresponding e-mail address: mimichalak@us.edu.pl.
-c Institute of Mathematics, Faculty of Science and Technology, University of Silesia in Katowice,
-Bankowa 14, 40-007 Katowice, Poland.
-d Faculty of Science and Technology, University of Silesia in Katowice,
-Bankowa 14, 40-007 Katowice, Poland.
-e Faculty of Engineering, China University of Geosciences, Wuhan, Hubei, China.
+a: Institute of Earth Sciences, Faculty of Natural Sciences, University of Silesia in Katowice, Będzińska 60, 41-205 Sosnowiec, Poland.
+
+b: AGH University of Technology in Kraków, al. Mickiewicza 30, Kraków, Poland.
+
+1: Corresponding e-mail address: mimichalak@us.edu.pl.
+
+c: Institute of Mathematics, Faculty of Science and Technology, University of Silesia in Katowice, Bankowa 14, 40-007 Katowice, Poland.
+
+d: Faculty of Science and Technology, University of Silesia in Katowice, Bankowa 14, 40-007 Katowice, Poland.
+
+e: Faculty of Engineering, China University of Geosciences, Wuhan, Hubei, China.
 
 # Abstract
 This study presents experimental results from assessing fault orientation using
