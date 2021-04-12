@@ -5,7 +5,7 @@ Constraining uncertainty of fault orientation using a combinatorial algorithm
 
 # Co-authors
 
-Michał Michalak a,b,1; Ryszard Kuzak a,1; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
+Michał Michalak a,b,1; Ryszard Kuzak a; Paweł Gładki c; Agnieszka Kulawik d; Yunfeng Ge e
 
 a: Institute of Earth Sciences, Faculty of Natural Sciences, University of Silesia in Katowice, Będzińska 60, 41-205 Sosnowiec, Poland.
 
