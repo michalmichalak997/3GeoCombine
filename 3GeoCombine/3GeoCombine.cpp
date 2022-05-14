@@ -243,7 +243,7 @@ int main()
 			{
 				istringstream convert(tempor);
 				double a, b, c;
-				if (!(convert >> a >> b >> c)) { cerr << "Error downloading data!"; }
+				if (!(convert >> a >> b >> c)) { cerr << "Error downloading data - check!"; }
 				pts.push_back(Point(a, b, c));
 			}
 
