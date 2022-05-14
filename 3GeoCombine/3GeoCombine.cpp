@@ -175,9 +175,9 @@ public:
 			normal_vec[1] = first_vec[2] * second_vec[0] - second_vec[2] * first_vec[0];
 			normal_vec[2] = first_vec[0] * second_vec[1] - second_vec[0] * first_vec[1];
 
-			normal_vec[0] / length(normal_vec);
-			normal_vec[1] / length(normal_vec);
-			normal_vec[2] / length(normal_vec);
+			normal_vec[0] /= length(normal_vec);
+			normal_vec[1] /= length(normal_vec);
+			normal_vec[2] /= length(normal_vec);
 
 			double stala = 0.5;
 			double half = stala * (length(first_vec) + length(second_vec) + length(third_vec));
