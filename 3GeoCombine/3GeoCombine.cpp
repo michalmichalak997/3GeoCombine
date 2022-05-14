@@ -163,15 +163,22 @@ public:
 				this->second_vec[i] = second_try[i];
 				this->third_vec[i] = third_try[i];
 			}
-			normal_vec[0] = first_vec[1] * second_vec[2] - second_vec[1] * first_vec[2];
-			normal_vec[1] = first_vec[2] * second_vec[0] - second_vec[2] * first_vec[0];
-			normal_vec[2] = first_vec[0] * second_vec[1] - second_vec[0] * first_vec[1];
+
 
 			if (normal_vec[2] < 0) {
 				normal_vec[0] *= -1;
 				normal_vec[1] *= -1;
 				normal_vec[2] *= -1;
 			}
+
+			normal_vec[0] = first_vec[1] * second_vec[2] - second_vec[1] * first_vec[2];
+			normal_vec[1] = first_vec[2] * second_vec[0] - second_vec[2] * first_vec[0];
+			normal_vec[2] = first_vec[0] * second_vec[1] - second_vec[0] * first_vec[1];
+
+			normal_vec[0] / length(normal_vec);
+			normal_vec[1] / length(normal_vec);
+			normal_vec[2] / length(normal_vec);
+
 			double stala = 0.5;
 			double half = stala * (length(first_vec) + length(second_vec) + length(third_vec));
 			double s = sqrt(half * (half - length(first_vec)) * (half - length(second_vec)) * (half - length(third_vec)));
@@ -236,7 +243,7 @@ int main()
 			{
 				istringstream convert(tempor);
 				double a, b, c;
-				if (!(convert >> a >> b >> c)) { break; }
+				if (!(convert >> a >> b >> c)) { cerr << "Error downloading data!"; }
 				pts.push_back(Point(a, b, c));
 			}
 
@@ -268,18 +275,11 @@ int main()
 				string result = current_plane.measure();								//extracting the dip angle and the dip direction
 				string centroid = current_plane.center(point_1, point_2, point_3);
 
-				double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
-				double y_n = current_plane.normal_vec[1];
-				double z_n = current_plane.normal_vec[2];
-
-				x_n = x_n / current_plane.length(current_plane.normal_vec);
-				y_n = y_n / current_plane.length(current_plane.normal_vec);
-				z_n = z_n / current_plane.length(current_plane.normal_vec);
 
 				all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
 					to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
 					to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
-					centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+					centroid << ";" << current_plane.normal_vec[0] << ";" << current_plane.normal_vec[1] << ";" << current_plane.normal_vec[2] << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 					endl;
 
 			}
@@ -301,18 +301,12 @@ int main()
 						string result = current_plane.measure();								//extracting the dip angle and the dip direction
 						string centroid = current_plane.center(point_1, point_2, point_3);
 
-						double x_n = current_plane.normal_vec[0]; //extracting coordinates of the normal vector of a planar Delaunay triangle
-						double y_n = current_plane.normal_vec[1];
-						double z_n = current_plane.normal_vec[2];
-
-						x_n = x_n / current_plane.length(current_plane.normal_vec);
-						y_n = y_n / current_plane.length(current_plane.normal_vec);
-						z_n = z_n / current_plane.length(current_plane.normal_vec);
+						
 
 						all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
 							to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
 							to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
-							centroid << ";" << x_n << ";" << y_n << ";" << z_n << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+							centroid << ";" << current_plane.normal_vec[0]; << ";" << current_plane.normal_vec[1]; << ";" << current_plane.normal_vec[2]; << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 							endl;
 
 						if (S[g - 1] == n_boreholes - 1) { p--; }
