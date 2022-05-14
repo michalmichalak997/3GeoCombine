@@ -306,7 +306,7 @@ int main()
 						all << to_string(point_1[0] / ratio) << ";" << to_string(point_1[1] / ratio) << ";" << to_string(point_1[2] / ratio) << ";" << //saving orientation elements with respect to the column names
 							to_string(point_2[0] / ratio) << ";" << to_string(point_2[1] / ratio) << ";" << to_string(point_2[2] / ratio) << ";" <<
 							to_string(point_3[0] / ratio) << ";" << to_string(point_3[1] / ratio) << ";" << to_string(point_3[2] / ratio) << ";" <<
-							centroid << ";" << current_plane.normal_vec[0]; << ";" << current_plane.normal_vec[1]; << ";" << current_plane.normal_vec[2]; << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
+							centroid << ";" << current_plane.normal_vec[0] << ";" << current_plane.normal_vec[1] << ";" << current_plane.normal_vec[2] << ";" << result << ";" << current_plane.doc << ";" << current_plane.area <<
 							endl;
 
 						if (S[g - 1] == n_boreholes - 1) { p--; }
